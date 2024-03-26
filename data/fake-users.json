@@ -1,0 +1,16 @@
+[
+  {
+    "avatar": "",
+    "name": "Fabian Noah",
+    "email": "admin@test.com",
+    "password": "admin",
+    "role": "POST"
+  },
+  {
+    "avatar": "",
+    "name": "Ofelia Emerson",
+    "email": "user@test.com",
+    "password": "user",
+    "role": "COMMENT"
+  }
+]
