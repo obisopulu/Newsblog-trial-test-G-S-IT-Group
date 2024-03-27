@@ -60,3 +60,12 @@ function env($key = null)
   }
 }
 
+function isAuth() {
+  return isset($_SESSION["user_id"]);
+}
+
+function imgPipe($img){
+  $path = env('PATH_STORAGE');
+  return str_contains($img, 'http') ? $img : $path.$img;
+}
+

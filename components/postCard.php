@@ -1,15 +1,11 @@
-<?php
-require_once './repositories/PostRepository.php';
-
-$posts = $postRepository->getPosts();
-$i = 0;
-?>
-
 <div class="post-card-container">
-<?php foreach ($posts as $post) { ?>
-    <div class="post-card<?php if($i === 0 && $page_number === 1){ echo ' mobile';}  ?>">
+<?php 
+
+$i = 0;
+foreach ($posts as $post) { ?>
+    <div class="post-card<?php if($i === 0 && $p == 1){ echo ' mobile';}  ?>">
         <div class="post-card-body">
-            <img class="post-card-image" src="<?=  $post['thumbnail']; ?>" alt="">
+            <img class="post-card-image" src="<?= imgPipe($post['thumbnail']) ?>" alt="">
             <div class="post-card-title">
             <?=  $post['headline']; ?>
             </div>

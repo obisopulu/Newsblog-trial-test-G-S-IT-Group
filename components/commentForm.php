@@ -1,13 +1,8 @@
-<?php
-include_once './repositories/CommentRepository.php';
-$_SESSION['user_id'] = 1;
-if( isset($_POST['comment']) )
-{
-    $commentRepository->addComment($_POST);
-}
+<?php  
+
 ?>
 
-<form class="post-comment-form" <?= FORM_ATTRIB ?>>
+<form class="post-comment-form" <?= Form::props() ?>>
     <label for="message" class="post-label">Leave a comment</label>
     <textarea required id="message" rows="4" name="comment" class="post-comment" placeholder="..."></textarea>
     <input type="hidden" readonly name="user_id" value="<?= $_SESSION['user_id'] ?>">

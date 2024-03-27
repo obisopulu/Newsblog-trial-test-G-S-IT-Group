@@ -3,7 +3,7 @@ require_once './repositories/PostRepository.php';
 require_once './repositories/CommentRepository.php';
 require_once './repositories/UserRepository.php';
 
-$_SESSION['user_id'] = 1;
+//$_SESSION['user_id'] = 1;
 
 
     

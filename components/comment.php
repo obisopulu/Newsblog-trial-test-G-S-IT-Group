@@ -1,6 +1,7 @@
 <?php
-include_once './repositories/CommentRepository.php';
+require_once './repositories/CommentRepository.php';
 require_once './repositories/UserRepository.php';
+
 
 $comments = $commentRepository->findComments(['post_id' => $_GET['id']]);
 ?>
@@ -20,13 +21,6 @@ $comments = $commentRepository->findComments(['post_id' => $_GET['id']]);
                         echo $user->name; 
                     ?>
                 </span>
-                <?php 
-                    if($comment['user_id'] == $_SESSION['user_id']){
-                ?>
-                    <button class="delete-btn">
-                        x
-                    </button>
-                <?php } ?>
             </div>
             <div class="comment-date">
             <?=  date_format(date_create($comment['created_at']), "d. M Y"); ?>

@@ -68,7 +68,7 @@ class Database
       $field = array_keys($req)[0];
       $value = array_values($req)[0];
       // 
-      $sql = "SELECT * FROM {$this->tb} WHERE {$field} LIKE CONCAT('%',?,'%') ORDER BY id DESC";
+      $sql = "SELECT * FROM {$this->tb} WHERE {$field}=?";
       $stmt = $this->conn->prepare($sql);
       $stmt->bind_param("s", $value);
       $stmt->execute();
@@ -93,16 +93,37 @@ class Database
 
   # PARAM body or id
   # RETURN rows or row
+  protected function like(array $req): array
+  {
+    $res = [];
+    $field = array_keys($req)[0];
+    $value = array_values($req)[0];
+    // 
+    $sql = "SELECT * FROM {$this->tb} WHERE {$field} LIKE CONCAT('%',?,'%') ORDER BY id DESC";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("s", $value);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+      array_push($res, $row);
+    }
+    // 
+    $this->close($stmt);
+    return $res;
+  }
+
+  # PARAM body or id
+  # RETURN rows or row
   protected function top(int $req = 1): object
   {
     // 
-      $res = new stdClass;
-      $sql = "SELECT * FROM {$this->tb} ORDER BY id DESC LIMIT ?";
-      $stmt = $this->conn->prepare($sql);
-      $stmt->bind_param("i", $req);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      $res = $result->fetch_object() ?? new stdClass;
+    $res = new stdClass;
+    $sql = "SELECT * FROM {$this->tb} ORDER BY id DESC LIMIT ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $req);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $res = $result->fetch_object() ?? new stdClass;
     // 
     $this->close($stmt);
     return $res;
@@ -126,6 +147,25 @@ class Database
     return $res;
   }
 
+  # PARAM body or id
+  # RETURN rows or row
+  protected function paginate(int $limit, int $offset): array
+  {
+    // 
+    $res = [];
+    $sql = "SELECT * FROM {$this->tb} ORDER BY id DESC LIMIT ? OFFSET ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("ii", $limit, $offset);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+      array_push($res, $row);
+    }
+    // 
+    $this->close($stmt);
+    return $res;
+  }
+  
   # PARAM id
   # RETURN affected rows
   protected function delete(int $id): int

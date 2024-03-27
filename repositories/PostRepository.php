@@ -38,6 +38,11 @@ final class PostRepository extends Database
     return $this->top();
   }
 
+  function getLimitedPosts(int $limit = 10, int $offset = 0): array
+  {
+    return $this->paginate($limit, $offset);
+  }
+
   # PARAM ['user_id' => 1] or ['post_id' => 1]
   function findPosts(array $formData): array
   {

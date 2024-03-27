@@ -18,42 +18,25 @@ final class UserRepository extends Database
     'name' => 'john doe', 
     'email' => 'john@example.com',
     'password' => '$trongp@ssw0rd' ] */
-  function signUp(array $formData)
+  function addUser(array $formData): int
   {
-    $path = env('PATH_AFTER_REGISTER');
-    $userId = $this->create($formData);
-    if ($userId > 0) nav($path);
+    return $this->create($formData);
   }
 
-  # PARAM ['email' => 1] or ['post_id' => 1]
-  function signIn(array $formData): string
+  function getUsers(): array
   {
-    $path = env('PATH_AFTER_LOGIN');
-    $user = $this->read(['email' => $formData['email']]);
-    // 
-    if (count($user) > 0) {
-      $user = (object)$user[0];
-      if ($formData['password'] === $user->password) {
-        $_SESSION['user'] = $user;
-        $_SESSION['user_id'] = $user->id;
-        // 
-        nav($path);
-      } else {
-        return "Password does not match";
-      }
-    } else {
-      return "Email not found";
-    }
+    return $this->read();
   }
 
-  function signOut()
+  function getUser(int $id): object
   {
-    $path = env('PATH_AFTER_LOGOUT');
-    // 
-    session_unset();
-    session_destroy();
-    // 
-    nav($path);
+    return $this->read($id);
+  }
+
+  # PARAM ['email' => 'admin@test.com'] or ['role' => 'COMMENT']
+  function findUsers(array $formData): array
+  {
+    return $this->read($formData);
   }
 
   # PARAM ['role' => 'POST'], 1
@@ -63,16 +46,6 @@ final class UserRepository extends Database
       return $this->update($formData, $id);
     else
       return -1;
-  }
-
-  function getUser(int $id): object
-  {
-    return $this->read($id);
-  }
-
-  function getUsers(): array
-  {
-    return $this->read();
   }
 }
 

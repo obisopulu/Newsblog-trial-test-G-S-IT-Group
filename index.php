@@ -1,11 +1,11 @@
 <?php
-$title = 'G&S News - The Latest in Technology, Science, Culture and Business';
-$post_count = 4;
-$page_number = 1;
+$title = 'Posts - G&S IT News';
 
 // CONTAINER
 require_once './components/partials/top.php';
 require_once './components/partials/header.php';
+require_once './repositories/PostRepository.php';
+require_once './hooks/handlePosts.php';
 
 // CONTENT  
 include_once './components/hero.php';

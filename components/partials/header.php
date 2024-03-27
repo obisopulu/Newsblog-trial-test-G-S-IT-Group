@@ -14,11 +14,15 @@
                         <li>
                             <a href="index.php">News</a>
                         </li>
+                            <?php if (isAuth()){ ?>
+                                <li>
+                                    <a href="dashboard.php">Dashboard</a>
+                                </li>
+                            <?php } ?>
                         <li>
-                            <a href="dashboard.php">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="login.php" class="btn">Logout / Login</a>
+                            <a href="<?= isAuth() ? "?logout=true" : "login.php";?>" class="btn">
+                                <?= isAuth() ? "Logout" : "Login";?>   
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -39,11 +43,15 @@
                         <li>
                             <a href="index.php">News</a>
                         </li>
+                            <?php if (isAuth()){ ?>
+                                <li>
+                                    <a href="dashboard.php">Dashboard</a>
+                                </li>
+                            <?php } ?>
                         <li>
-                            <a href="dashboard.php">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="login.php" class="btn">Logout / Login</a>
+                            <a href="<?= isAuth() ? "?logout=true" : "login.php";?>" class="btn">
+                                <?= isAuth() ? "Logout" : "Login";?>   
+                            </a>
                         </li>
                     </ul>
                 </div>

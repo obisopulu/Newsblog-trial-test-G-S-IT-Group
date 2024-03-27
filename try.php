@@ -8,7 +8,7 @@ include_once './repositories/CommentRepository.php';
 include_once './repositories/UserRepository.php';
 
 dd(
-  // $PostRepository->refresh(),
+  // $migration->refresh(),
   // $migration->seed(),
   // $migration->comments(),
 );

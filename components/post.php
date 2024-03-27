@@ -1,6 +1,11 @@
 <?php
+require_once './config/form.php';
+
 require_once './repositories/PostRepository.php';
 require_once './repositories/UserRepository.php';
+include_once './repositories/CommentRepository.php';
+
+require_once './hooks/handleComment.php';
 
 $post = $postRepository->getPost($_GET['id']);
 $user = $userRepository->getUser($post->user_id);
@@ -17,7 +22,7 @@ $title = $post->headline;
         <?=  date_format(date_create($post->created_at), "d. M Y"); ?>
     </div>
 
-    <img class="post-image" src="<?=  $post->thumbnail; ?>" alt="">
+    <img class="post-image" src="<?=  imgPipe($post->thumbnail); ?>" alt="">
 
     <div class="post-content">
         <?=  $post->article; ?>

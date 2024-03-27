@@ -1,5 +1,5 @@
 <?php
-$title = 'G&S News - The Latest in Technology, Science, Culture and Business';
+$title = 'Post - G&S IT News';
 $post_count = 4;
 $page_number = 1;
 

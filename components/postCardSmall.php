@@ -1,7 +1,7 @@
 <?php
 require_once './repositories/PostRepository.php';
 
-$posts = $postRepository->getPosts();
+$posts = $postRepository->findPosts(['user_id' => $_SESSION['user_id']]);
 
 ?>
 
@@ -11,9 +11,9 @@ $posts = $postRepository->getPosts();
         </h2>
 
 <?php foreach ($posts as $post) { ?>
-    <a href="#" class="post-small-linker">
+    <a href="post.php?id=<?=  $post['id']; ?>" class="post-small-linker">
         <div class="post-small-card desktop<?php if($page_number > 1){ echo ' hide';}  ?>">
-            <img class="post-small-image" src="./public/uploads/Kununu-Award-30f3cc64.jpg" alt="">
+            <img class="post-small-image" src="<?=  imgPipe($post['thumbnail']); ?>" alt="">
             <div class="post-small-body">
                 <div class="post-small-title">
                 <?=  substr($post['article'], 0, 60) . '...' ; ?>
